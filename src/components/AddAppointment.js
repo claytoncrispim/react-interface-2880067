@@ -1,12 +1,21 @@
 import { BiCalendarPlus } from "react-icons/bi";
+import { useState } from "react";
 
 const AddAppointment = () => {
+    // useState is a hook that allows us to have state variables in functional components by importing it from 
+    // react and calling it inside the component function body. It is used to create state variables that can hold 
+    // and manage data that may change over time.
+    // In this case, toggleForm is a boolean state variable that indicates whether the form is visible or not.
+    let [toggleForm, setToggleForm] = useState(false); // State to show/hide the form
     return (
         <div>
-            <button className="bg-blue-400 text-white px-2 py-3 w-full text-left rounded-t-md">
+            <button onClick={() => setToggleForm(!toggleForm)}
+                className={`bg-blue-400 text-white px-2 py-3 w-full text-left rounded-t-md ${toggleForm ? 'rounded-t-md' : 'rounded-md'}`}>
                 <div><BiCalendarPlus className="inline-block align-text-top" />  Add Appointment</div>
             </button>
-            <div className="border-r-2 border-b-2 border-l-2 border-light-blue-500 rounded-b-md pl-4 pr-4 pb-4">
+            {
+                toggleForm &&
+                            <div className="border-r-2 border-b-2 border-l-2 border-light-blue-500 rounded-b-md pl-4 pr-4 pb-4">
                 <div className="sm:grid sm:grid-cols-3 sm:gap-4 sm:items-start  sm:pt-5">
                     <label htmlFor="ownerName" className="block text-sm font-medium text-gray-700 sm:mt-px sm:pt-2">
                         Owner Name
@@ -68,6 +77,8 @@ const AddAppointment = () => {
                     </div>
                 </div>
             </div>
+            }
+
         </div>        
     )
 }
