@@ -52,7 +52,17 @@ function App() {
         <BiCalendar className="inline-block text-red-400 align-top"/> Your Appointments
       </h1>
       {/* Components */}
-      <AddAppointment />
+      <AddAppointment 
+      // 1. onSendAppointment is a prop that we create to send data from the child component (AddAppointment) to the parent component (App)
+      // 2. We create an arrow function that receives the myAppointment object from the child component
+      // 3. We call the setAppointmentList method to update the state
+      // 4. We use the spread operator (...) to copy all the previous appointments from the appointmentList array
+      // 5. We create a new array that contains all the previous appointments and add the new appointment at the end of the array
+      // 6. The new array is then set as the new state
+        onSendAppointment={myAppointment =>
+          setAppointmentList([...appointmentList, myAppointment])}
+          lastId={appointmentList.reduce((max, item) => Number(item.id) > max ? Number(item.id) : max, 0)}
+      />
       <Search query={query}
         onQueryChange={myQuery => setQuery(myQuery)}
         orderBy={orderBy}
